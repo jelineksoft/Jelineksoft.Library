@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Dynamic;
+using System.Runtime.ConstrainedExecution;
 
 namespace Jelineksoft.Library.Language
 {
@@ -25,6 +26,17 @@ namespace Jelineksoft.Library.Language
             if (LanguageItems.ContainsKey(key))
                 return LanguageItems[key].GetText(LanguageType);
             return $"Key '{key}' not found in LanguageItems.";
+        }
+
+        public string GetX(string en = "", string cz = "")
+        {
+            switch (LanguageType)
+            {
+                case LanguageEnum.Cz:
+                    return cz;
+                default:
+                    return en;
+            }
         }
 
         public void Add(int key, LanguageItem item)
