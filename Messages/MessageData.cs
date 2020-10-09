@@ -29,44 +29,52 @@ namespace Jelineksoft.Library.Messages
 
         public void SetDataJSON(object data)
         {
-            if (data == null) this.Data = null;
+            if (data == null) {this.Data = null;
+                return;
+            }
             
-            var set = new JsonSerializerSettings();
-            set.TypeNameHandling = TypeNameHandling.Objects;
-            set.MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead;
-
-            this.Data = JsonConvert.SerializeObject(data, set);
+            this.Data = JsonConvert.SerializeObject(data, GetSettings());
         }
         public void SetDataFilterJSON(object data)
         {
-            if (data == null) this.DataFilter = null;
+            if (data == null) {this.DataFilter = null;
+                return;
+            }
             
-            var set = new JsonSerializerSettings();
-            set.TypeNameHandling = TypeNameHandling.Objects;
-            set.MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead;
-
-            this.DataFilter = JsonConvert.SerializeObject(data, set);
+            this.DataFilter = JsonConvert.SerializeObject(data, GetSettings());
         }
 
         public T GetDataJSON<T>() where T : class
         {
             if (this.Data == null) return null;
-            var set = new JsonSerializerSettings();
-            set.TypeNameHandling = TypeNameHandling.All;
-            set.MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead;
-
-            var x = JsonConvert.DeserializeObject<T>(this.Data, set);
+            
+            var x = JsonConvert.DeserializeObject<T>(this.Data, GetSettings());
             return x;
         }
+        
+        public T GetFromJSONString<T>(string data) where T : class
+        {
+            if (data == null) return null;
+            
+            var x = JsonConvert.DeserializeObject<T>(data, GetSettings());
+            return x;
+        }
+
         public T GetDataFilterJSON<T>() where T : class
         {
             if (this.DataFilter == null) return null;
-            var set = new JsonSerializerSettings();
-            set.TypeNameHandling = TypeNameHandling.All;
-            set.MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead;
+            
 
-            var x = JsonConvert.DeserializeObject<T>(this.DataFilter, set);
+            var x = JsonConvert.DeserializeObject<T>(this.DataFilter, GetSettings());
             return x;
+        }
+
+        private JsonSerializerSettings GetSettings()
+        {
+            var set = new JsonSerializerSettings();
+            set.TypeNameHandling = TypeNameHandling.Auto;
+            set.MetadataPropertyHandling = MetadataPropertyHandling.Default;
+            return set;
         }
 
     }
