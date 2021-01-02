@@ -74,6 +74,8 @@ namespace Jelineksoft.Library.Messages
             var set = new JsonSerializerSettings();
             set.TypeNameHandling = TypeNameHandling.Auto;
             set.MetadataPropertyHandling = MetadataPropertyHandling.Default;
+            set.MissingMemberHandling = MissingMemberHandling.Ignore;
+            set.NullValueHandling = NullValueHandling.Include;
             return set;
         }
 
