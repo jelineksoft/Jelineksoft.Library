@@ -8,7 +8,7 @@ namespace Jelineksoft.Library.Messages
     {
 
         public MessageData()
-            : base(new MessageHeader())
+            : base(null)
         {
             
         }
@@ -20,6 +20,11 @@ namespace Jelineksoft.Library.Messages
 
         public MessageData(MessageHeader msgHeader, object data)
             : base(msgHeader)
+        {
+            SetDataJSON(data);
+        }
+        public MessageData(object data)
+            : base(null)
         {
             SetDataJSON(data);
         }
