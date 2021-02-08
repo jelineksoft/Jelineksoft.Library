@@ -14,13 +14,19 @@ namespace Jelineksoft.Library.Messages
         public DateTime Date { get; set; }
 
         public int ErrorNumber { get; set; }
-        public string ErrorDescription { get; set; }
+        public string ErrorDescription { get; set; } = "";
 
         public bool HasError()
         {
             if (ErrorNumber != 0)
                 return true;
             return false;
+        }
+
+        public void ClearError()
+        {
+            ErrorNumber = 0;
+            ErrorDescription = "";
         }
 
 }

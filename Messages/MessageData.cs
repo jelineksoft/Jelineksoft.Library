@@ -83,6 +83,6 @@ namespace Jelineksoft.Library.Messages
             set.NullValueHandling = NullValueHandling.Include;
             return set;
         }
-
+        
     }
 }
